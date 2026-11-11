@@ -28,6 +28,7 @@ window.addEventListener('DOMContentLoaded', () => {
   $('filmSeek').setAttribute('aria-label',labels.seek);
   $('closeDossier').setAttribute('aria-label',labels.close);
   const video=$('alexVideo'),audio=$('alexNarration'),cinema=$('alexCinema'),archive=$('alexArchive');
+  document.querySelector('.startTriangle').innerHTML=window.MediaIcons.play;
   const dialog=$('dossierDialog');
   // Native modal dialogs make outside controls inert; keep a language switch inside.
   const modalLanguage=document.querySelector('.siteLanguage').cloneNode(true);
@@ -48,7 +49,9 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
   function updatePlayback() {
-    $('filmPlayPause').textContent=audio.paused?'▶':'Ⅱ';
+    $('filmPlayPause').innerHTML=window.MediaIcons[audio.paused?'play':'pause'];
+    $('filmPlayPause').style.visibility=audio.paused?'hidden':'visible';
+    cinema.classList.toggle('isPaused',audio.paused);
     $('startFilm').hidden=!audio.paused || stage!=='cinema';
   }
   async function play() {
@@ -60,7 +63,7 @@ window.addEventListener('DOMContentLoaded', () => {
   audio.addEventListener('play',updatePlayback);
   audio.addEventListener('pause',updatePlayback);
   audio.addEventListener('error',()=>{$('startFilmLabel').textContent=labels.error;updatePlayback();});
-  $('filmPlayPause').addEventListener('click',()=>audio.paused?play():audio.pause());
+  $('filmPlayPause').addEventListener('click',()=>{if(audio.paused)play();else {audio.pause();video.pause();}});
   $('startFilm').addEventListener('click',play);
   $('filmSeek').addEventListener('input',()=>{
     if (Number.isFinite(audio.duration)) audio.currentTime=Number($('filmSeek').value)/1000*audio.duration;
@@ -94,6 +97,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
   function setPortrait(image,file) {
     image.src=`../../../imagesAndVideos/alex/${file.image}`;
+    image.style.filter=image.id==='dossierImage'?'url("#portraitPaper")':'url("#portraitPaper") saturate(.55) contrast(1.1)';
     image.style.transform=file.rotate?`rotate(${file.rotate}deg) scale(.85)`:'';
     image.dataset.crop=file.crop||'';
     // object-fit adds blank space: measure the visible scan before trimming its edges.

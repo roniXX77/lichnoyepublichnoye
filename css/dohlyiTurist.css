@@ -506,21 +506,38 @@ body.modal-open {
   }
 }
 @media(max-width:760px), (max-height:500px) {
-  :root {--top-height:120px;}
-  .departure-board {height:100dvh;min-width:0;}
-  .board-top {flex-wrap:wrap;gap:8px;padding:10px 12px;}
+  html:has(#turistPage) {height:auto;overflow-y:auto;}
+  html:has(#turistPage.modal-open) {overflow:hidden;}
+  body#turistPage {height:auto;min-height:100svh;overflow:visible;}
+  .departure-board {height:auto;min-height:100svh;min-width:0;display:flex;flex-direction:column;}
+  .board-top {position:sticky;top:0;z-index:10;flex-wrap:wrap;gap:8px;padding:10px 12px;}
   .board-top__left {flex:1 1 100%;gap:10px;}
   .board-icon {width:32px;height:32px;min-width:32px;}
   .board-top__right {width:100%;justify-content:space-between;gap:8px;}
-  .board-clock-box,.board-exit-box,.board-page-box {min-width:0;}
-  .board-clock,.board-exit,.board-page {min-width:0;padding:8px;font-size:10px;}
-  .board-screen {min-width:0;overflow-x:auto;}
-  .board-columns,.board-rows,.board-bottom-line {min-width:700px;}
-  .board-rows {overflow-y:auto;}
+  .board-clock-box,.board-exit-box {min-width:0;}
+  .board-page-box {display:none;}
+  .board-clock,.board-exit {min-width:0;padding:8px;font-size:11px;}
+  .board-screen {min-width:0;display:block;overflow:visible;}
+  .board-columns {display:none;}
+  .board-rows {min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));grid-template-rows:none;grid-auto-rows:auto;gap:12px;padding:16px 12px 90px;overflow:visible;}
+  .board-row-wrap {min-width:0;}
+  .board-row {min-width:0;width:100%;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:'destination destination' 'time code' 'gate status';gap:18px 12px;padding:20px 18px;border:1px solid var(--line-strong);border-radius:6px;background:linear-gradient(140deg,#101e2a,#050a10);font-size:12px;line-height:1.8;text-align:left;}
+  .board-row>span {min-width:0;overflow-wrap:anywhere;white-space:normal;}
+  .board-row>span::before {content:attr(data-label);display:block;margin-bottom:7px;font:10px/1.3 Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#91abc2;}
+  .flight-time {grid-area:time;}
+  .flight-destination {grid-area:destination;font-size:16px!important;line-height:1.65;}
+  .flight-destination::before {display:none!important;}
+  .flight-code {grid-area:code;}
+  .flight-gate {grid-area:gate;}
+  .flight-status {grid-area:status;font-size:11px!important;line-height:1.8;}
+  .board-bottom-line {min-width:0;overflow:hidden;}
   .flight-modal__dialog {inset:4dvh 2vw;width:auto;max-height:88dvh;}
   .flight-modal__header {padding:12px;gap:8px;}
   .flight-modal__title {font-size:12px;}
   .flight-modal__meta {font-size:9px;overflow-wrap:anywhere;line-height:1.8;}
   .flight-modal__content {padding:16px;font-size:12px;line-height:2.2;}
   .flight-modal__close {font-size:10px;padding:10px;}
+}
+@media(max-width:760px), (max-height:500px) {
+  .flight-status--closed {animation:none;color:#ff8395;}
 }

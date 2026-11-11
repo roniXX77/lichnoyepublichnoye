@@ -27,7 +27,7 @@ for lang in ('en','ru'):
 for path in ['intro.mp4','intro-poster.jpg','avtorBackground.jpeg','folderIcon.png','audio/rain','vlublenniyAgent']:
     copy(Path('imagesAndVideos')/path)
 for path in (root/'imagesAndVideos/icons').glob('icon-*.png'): copy(path.relative_to(root))
-for name in ['film.mp4','alexEN.m4a','alexRU.m4a',*[f'character-{n}.png' for n in range(1,21)]]:
+for name in ['film.mp4','film-poster.jpg','alexEN.m4a','alexRU.m4a',*[f'character-{n}.png' for n in range(1,21)]]:
     copy(Path('imagesAndVideos/alex')/name)
 
 class CheckLinks(HTMLParser):

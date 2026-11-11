@@ -79,3 +79,15 @@ button:focus-visible,a:focus-visible,input:focus-visible {outline:2px solid var(
 
 .sceneFade {position:fixed;inset:0;z-index:50;background:#000;opacity:0;pointer-events:all;}
 .archiveRule {justify-content:flex-end;}
+
+/* Remove scan paper with alpha, independently of Safari's backdrop blending. */
+.portraitFilters {position:absolute;pointer-events:none;overflow:hidden;}
+.cardImage img,.dossierPortrait img {mix-blend-mode:normal;}
+#alexVideo {pointer-events:none;}
+#alexVideo::-webkit-media-controls,
+#alexVideo::-webkit-media-controls-start-playback-button {display:none!important;-webkit-appearance:none;}
+.startFilm {top:50%;flex-direction:column;gap:12px;}
+.startTriangle svg {width:22px;height:22px;}
+.filmPlayPause {display:grid;place-items:center;width:38px;min-height:38px;visibility:hidden;}
+.filmPlayPause svg {width:20px;height:20px;}
+.isPaused .alexSubtitle {opacity:0;}

@@ -1117,3 +1117,15 @@ input :active, :hover, :focus {
 @media(max-width:760px) {
   .mailPage input:not([type="checkbox"]),.mailPage textarea {font-size:16px!important;}
 }
+
+.mailMenuToggle {display:flex;align-items:center;gap:10px;border:0;background:none;color:#6676b8;padding:0;font:inherit;text-align:left;}
+.mailMenuToggle svg {display:none;width:20px;height:20px;flex:none;}
+@media(max-width:760px) {
+  .mailSidebar {position:relative;overflow:visible;z-index:30;}
+  .mailMenuToggle {min-height:38px;cursor:pointer;}
+  .mailMenuToggle svg {display:block;}
+  .mailFolders {display:none;position:absolute;top:calc(100% - 1px);left:12px;width:min(280px,calc(100vw - 24px));max-height:65dvh;overflow-y:auto;flex-direction:column;gap:4px;padding:10px;background:#f7f8ff;border:1px solid #6676b845;box-shadow:0 12px 25px #29356425;}
+  .isMenuOpen .mailFolders {display:flex;}
+  .mailFolders .folder {width:100%;min-height:42px;text-align:left;}
+  .mailComposer input,.mailComposer textarea {min-width:0;width:100%;box-sizing:border-box;}
+}

@@ -11,6 +11,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const poems = window.RainContent[window.SiteLanguage.current];
   const en = window.SiteLanguage.current === 'en';
   let selected = -1;
+  document.getElementById('previousTrack').innerHTML=window.MediaIcons.previous;
+  document.getElementById('nextTrack').innerHTML=window.MediaIcons.next;
 
   // Stable positions with three depths; the animation lives behind the page.
   let seed = 42;
@@ -37,7 +39,7 @@ window.addEventListener('DOMContentLoaded', () => {
       item.classList.toggle('playing', index === selected && !audio.paused);
       item.setAttribute('aria-pressed', String(index === selected));
     });
-    play.textContent = audio.paused ? '▶' : '❚❚';
+    play.innerHTML = window.MediaIcons[audio.paused ? 'play' : 'pause'];
     play.setAttribute('aria-label', en ? (audio.paused ? 'Play' : 'Pause') : (audio.paused ? 'Воспроизвести' : 'Пауза'));
   }
   function renderProgress() {

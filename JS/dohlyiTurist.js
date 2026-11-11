@@ -26,7 +26,8 @@
 
   let currentPage = 0;
 
-  const flightsPerPage = 12;
+  const desktopPageSize = 12;
+  const compactBoard = matchMedia("(max-width:760px), (max-height:500px)");
   const pageSwitchMs = 20000;
 
   const flights = [
@@ -64,7 +65,8 @@
     landed: { className: "flight-status--landed", label: "landed" }
   };
 
-  const totalPages = Math.ceil(flights.length / flightsPerPage);
+  const pageSize = () => compactBoard.matches ? flights.length : desktopPageSize;
+  const totalPages = () => Math.ceil(flights.length / pageSize());
 
   function createRow(flight) {
     const wrap = document.createElement("article");
@@ -94,6 +96,10 @@
     status.className = statusMap[flight.status].className;
     status.textContent = statusMap[flight.status].label;
 
+    for (const [element,label] of [[time,'time'],[destination,'destination'],[code,'flight'],[gate,'gate'],[status,'status']]) {
+      element.dataset.label=window.SiteLanguage.translate(label);
+    }
+    status.classList.add('flight-status');
     button.append(time, destination, code, gate, status);
 
     button.addEventListener("click", () => {
@@ -105,8 +111,8 @@
   }
 
   function renderFlightsPage(pageIndex) {
-    const start = pageIndex * flightsPerPage;
-    const pageFlights = flights.slice(start, start + flightsPerPage);
+    const start = pageIndex * pageSize();
+    const pageFlights = flights.slice(start, start + pageSize());
 
     const fragment = document.createDocumentFragment();
 
@@ -117,15 +123,15 @@
     flightsContainer.innerHTML = "";
     flightsContainer.appendChild(fragment);
 
-    pageIndicator.textContent = `${pageIndex + 1} / ${totalPages}`;
+    pageIndicator.textContent = `${pageIndex + 1} / ${totalPages()}`;
   }
 
   function nextPage() {
-    if (modal.classList.contains("is-open")) {
+    if (compactBoard.matches || modal.classList.contains("is-open")) {
       return;
     }
 
-    currentPage = (currentPage + 1) % totalPages;
+    currentPage = (currentPage + 1) % totalPages();
     renderFlightsPage(currentPage);
   }
 
@@ -168,6 +174,7 @@
     }
   });
 
+  compactBoard.addEventListener('change',()=>{currentPage=0;renderFlightsPage(currentPage);});
   renderFlightsPage(currentPage);
   setInterval(nextPage, pageSwitchMs);
 })();

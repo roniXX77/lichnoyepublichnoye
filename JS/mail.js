@@ -9,6 +9,24 @@
     const selectAll = document.getElementById("selectAll");
     if (!mailItemsEl || !composeBtn || !searchInput) return;
   
+    const menuToggle=document.getElementById('mailMenuToggle');
+    const sidebar=document.querySelector('.mailSidebar');
+    const mobileMenu=matchMedia('(max-width:760px)');
+    function closeMenu() {
+      sidebar.classList.remove('isMenuOpen');
+      menuToggle.setAttribute('aria-expanded',String(!mobileMenu.matches));
+      menuToggle.tabIndex=mobileMenu.matches?0:-1;
+    }
+    menuToggle.addEventListener('click',()=>{
+      if (!mobileMenu.matches) return;
+      const open=sidebar.classList.toggle('isMenuOpen');
+      menuToggle.setAttribute('aria-expanded',String(open));
+    });
+    mobileMenu.addEventListener('change',closeMenu);
+    closeMenu();
+    document.addEventListener('click',event=>{if(!sidebar.contains(event.target))closeMenu();});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMenu();});
+
     const uid = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
   
     const state = {
@@ -379,6 +397,7 @@
     };
   
     const openComposer = (prefill = {}) => {
+      closeMenu();
       const overlay = document.createElement("div");
       overlay.style.position = "fixed";
       overlay.style.inset = "0";
@@ -388,6 +407,10 @@
       overlay.style.zIndex = "9999";
   
       const modal = document.createElement("div");
+      modal.className="mailComposer";
+      modal.setAttribute("role","dialog");
+      modal.setAttribute("aria-modal","true");
+      modal.setAttribute("aria-labelledby","composerTitle");
       modal.style.width = "min(640px, 92vw)";
       modal.style.maxHeight = "90dvh";
       modal.style.overflowY = "auto";
@@ -405,10 +428,13 @@
   
       const title = document.createElement("div");
       title.style.fontWeight = "700";
+      title.id="composerTitle";
       title.textContent = "новое сообщение";
   
       const close = document.createElement("button");
       close.textContent = "✕";
+      close.type="button";
+      close.setAttribute("aria-label",window.SiteLanguage.translate("close"));
       close.style.border = "1px solid rgba(102,118,184,0.2)";
       close.style.background = "#6676b8";
       close.style.color = "#ffffff";
@@ -416,12 +442,16 @@
       close.style.cursor = "pointer";
       close.style.padding = "6px 10px";
   
-      const form = document.createElement("div");
+      const form = document.createElement("form");
       form.style.marginTop = "12px";
       form.style.display = "grid";
       form.style.gap = "10px";
   
       const to = document.createElement("input");
+      to.name="to";
+      to.type="email";
+      to.required=true;
+      to.setAttribute("aria-label",window.SiteLanguage.translate("кому"));
       to.placeholder = "кому";
       to.style.padding = "12px";
       to.style.borderRadius = "0px";
@@ -430,6 +460,8 @@
       to.style.color = "#6676b8";
   
       const subject = document.createElement("input");
+      subject.name="subject";
+      subject.setAttribute("aria-label",window.SiteLanguage.translate("тема"));
       subject.placeholder = "тема";
       subject.style.padding = "12px";
       subject.style.borderRadius = "0px";
@@ -438,6 +470,9 @@
       subject.style.color = "#6676b8";
   
       const body = document.createElement("textarea");
+      body.name="body";
+      body.required=true;
+      body.setAttribute("aria-label",window.SiteLanguage.translate("текст..."));
       body.placeholder = "текст...";
       body.rows = 7;
       body.style.padding = "12px";
@@ -449,12 +484,7 @@
   
       to.value = prefill.to || "";
       subject.value = prefill.subject || "";
-      if (prefill.reply) {
-        to.disabled = true;
-        subject.disabled = true;
-      }
-      to.readOnly = true;
-      subject.readOnly = true;
+
   
       const bottom = document.createElement("div");
       bottom.style.display = "flex";
@@ -463,6 +493,7 @@
       bottom.style.marginTop = "10px";
   
       const saveDraft = document.createElement("button");
+      saveDraft.type="button";
       saveDraft.textContent = "в черновики";
       saveDraft.style.border = "1px solid rgba(102,118,184,0.22)";
       saveDraft.style.background = "#ffffff";
@@ -472,6 +503,7 @@
       saveDraft.style.padding = "10px 12px";
   
       const send = document.createElement("button");
+      send.type="submit";
       send.textContent = "отправить";
       send.style.border = "1px solid #6676b8";
       send.style.background = "#6676b8";
@@ -480,7 +512,15 @@
       send.style.cursor = "pointer";
       send.style.padding = "10px 12px";
   
-      const closeModal = () => overlay.remove();
+      const closeModal = () => {overlay.remove();composeBtn.focus();};
+      overlay.addEventListener('keydown',event=>{
+        if(event.key==='Escape') {event.preventDefault();closeModal();return;}
+        if(event.key!=='Tab')return;
+        const fields=[...modal.querySelectorAll('button,input,textarea')].filter(field=>!field.disabled);
+        const first=fields[0],last=fields[fields.length-1];
+        if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+        else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+      });
       close.addEventListener("click", closeModal);
       overlay.addEventListener("click", (e) => { if (e.target === overlay) closeModal(); });
   
@@ -501,7 +541,8 @@
         renderList();
       });
       
-      send.addEventListener("click", () => {
+      form.addEventListener("submit", event => {
+        event.preventDefault();
         const msg = {
           id: uid(),
           from: "я",
@@ -512,9 +553,15 @@
           time: nowTime(),
           unread: false
         };
-        state.spam.unshift(msg);
+        state.sent.unshift(msg);
+        currentFolder='sent';
+        searchQuery='';searchInput.value='';
+        openedId=msg.id;
+        setActiveFolderBtn('sent');
+        clearSelection();
         updateBadges();
         closeModal();
+        document.querySelector('.mailContent').classList.add('hasOpenMessage');
         renderList();
       });
   
@@ -525,13 +572,14 @@
       overlay.append(modal);
       document.body.append(overlay);
   
-      setTimeout(() => body.focus(), 50);
+      setTimeout(() => (prefill.reply ? body : to).focus(), 50);
     };
   
     foldersEl.addEventListener("click", (e) => {
       const btn = e.target.closest(".folder");
       if (!btn) return;
       currentFolder = btn.dataset.folder;
+      closeMenu();
       clearSelection();
       if (!searchQuery) openedId = null;
       setActiveFolderBtn(currentFolder);
@@ -553,7 +601,7 @@
       renderList();
     });
   
-    composeBtn.addEventListener("click", openComposer);
+    composeBtn.addEventListener("click", () => openComposer());
   
     searchInput.addEventListener("input", () => {
       searchQuery = searchInput.value.trim();
@@ -907,6 +955,7 @@
     };
   
     document.addEventListener("keydown", (e) => {
+      if (e.target.closest(".mailComposer")) return;
       const activeTag = document.activeElement?.tagName?.toLowerCase();
       const isTypingField =
         activeTag === "input" ||

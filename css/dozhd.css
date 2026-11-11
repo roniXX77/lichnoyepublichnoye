@@ -379,3 +379,6 @@
 @media(max-width:480px) {
   .trackItem,.listHead {grid-template-columns:36px minmax(0,1fr) 48px;gap:8px;}
 }
+.iconBtn {display:grid;place-items:center;}
+.iconBtn svg {width:26px;height:26px;}
+.skipTrack svg {width:22px;height:22px;}
