@@ -24,13 +24,13 @@
     <header class="topPanel">
       <div class="topLeft">
         <div class="pageTimer" id="dozhdTimer">00:00</div>
-        <a href="../../../main.html" class="exitBtn">остановиться</a>
+        <a href="../../../main.html?return=1" class="exitBtn">остановиться</a>
       </div>
 
       <div class="topRight">
         <div class="playlistLabel">плейлист</div>
         <h1>личное публичное</h1>
-        <p>13 аудиодорожек</p>
+        <p>10 аудиодорожек</p>
       </div>
     </header>
 
@@ -51,9 +51,7 @@
 
         <div class="audioTimerRow">
           <span id="currentTime">00:00</span>
-          <div class="progressLine">
-            <div class="progressFill" id="progressFill"></div>
-          </div>
+          <input id="trackSeek" class="trackSeek" type="range" min="0" max="1000" step="1" value="0" disabled aria-label="перемотать дорожку">
           <span id="duration">00:00</span>
         </div>
 
@@ -75,18 +73,18 @@
 
         <div class="trackList" id="trackList">
 <button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-01.m4a" data-title="раз два три четыре"><span>01</span><span class="trackName">раз два три четыре</span><span class="trackTime">01:15</span></button>
-<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-02.m4a" data-title="гречишный хлеб"><span>02</span><span class="trackName">гречишный хлеб</span><span class="trackTime">05:00</span></button>
-<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-03.m4a" data-title="алексей"><span>03</span><span class="trackName">алексей</span><span class="trackTime">09:11</span></button>
-<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-04.m4a" data-title="возле гаража 7 июля 2025"><span>04</span><span class="trackName">возле гаража 7 июля 2025</span><span class="trackTime">00:58</span></button>
-<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-05.m4a" data-title="третьяковская метро 25 июня"><span>05</span><span class="trackName">третьяковская метро 25 июня</span><span class="trackTime">04:42</span></button>
-<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-06.m4a" data-title="blood"><span>06</span><span class="trackName">blood</span><span class="trackTime">02:42</span></button>
-<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-07.m4a" data-title="run!"><span>07</span><span class="trackName">run!</span><span class="trackTime">01:48</span></button>
-<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-08.m4a" data-title="New Recording 2"><span>08</span><span class="trackName">New Recording 2</span><span class="trackTime">00:05</span></button>
-<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-09.m4a" data-title="от зари и до зари"><span>09</span><span class="trackName">от зари и до зари</span><span class="trackTime">01:17</span></button>
-<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-10.m4a" data-title="рынок 22 июня"><span>10</span><span class="trackName">рынок 22 июня</span><span class="trackTime">05:02</span></button>
-<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-11.m4a" data-title="machine sex"><span>11</span><span class="trackName">machine sex</span><span class="trackTime">00:19</span></button>
-<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-12.m4a" data-title="пушкин 2 июля"><span>12</span><span class="trackName">пушкин 2 июля</span><span class="trackTime">01:58</span></button>
-<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-13.m4a" data-title="звенит душа в парке горького летом"><span>13</span><span class="trackName">звенит душа в парке горького летом</span><span class="trackTime">01:30</span></button>
+
+<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-03.m4a" data-title="алексей"><span>02</span><span class="trackName">алексей</span><span class="trackTime">09:11</span></button>
+<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-04.m4a" data-title="возле гаража 7 июля 2025"><span>03</span><span class="trackName">возле гаража 7 июля 2025</span><span class="trackTime">00:58</span></button>
+<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-05.m4a" data-title="третьяковская метро 25 июня"><span>04</span><span class="trackName">третьяковская метро 25 июня</span><span class="trackTime">04:42</span></button>
+<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-06.m4a" data-title="blood"><span>05</span><span class="trackName">blood</span><span class="trackTime">02:42</span></button>
+<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-07.m4a" data-title="run!"><span>06</span><span class="trackName">run!</span><span class="trackTime">01:48</span></button>
+<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-08.m4a" data-title="New Recording 2"><span>07</span><span class="trackName">New Recording 2</span><span class="trackTime">00:05</span></button>
+
+
+<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-11.m4a" data-title="machine sex"><span>08</span><span class="trackName">machine sex</span><span class="trackTime">00:19</span></button>
+<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-12.m4a" data-title="пушкин 2 июля"><span>09</span><span class="trackName">пушкин 2 июля</span><span class="trackTime">01:58</span></button>
+<button class="trackItem" data-src="../../../imagesAndVideos/audio/rain/track-13.m4a" data-title="звенит душа в парке горького летом"><span>10</span><span class="trackName">звенит душа в парке горького летом</span><span class="trackTime">01:30</span></button>
         </div>
       </section>
     </main>

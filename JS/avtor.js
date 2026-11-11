@@ -319,7 +319,7 @@ const stopBtn = document.getElementById("stopBtn");
 
 if (stopBtn) {
   stopBtn.addEventListener("click", () => {
-    window.location.href = "../../../main.html";
+    window.location.href = "../../../main.html?return=1";
   });
 }
 })();

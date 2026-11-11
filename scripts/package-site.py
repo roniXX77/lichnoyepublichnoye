@@ -3,6 +3,8 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import hashlib
+import re
 from html.parser import HTMLParser
 from urllib.parse import urlsplit, unquote
 
@@ -39,7 +41,16 @@ class CheckLinks(HTMLParser):
             target = (self.path.parent/unquote(url.path)).resolve()
             assert target.exists(), f'Missing packaged resource: {self.path}: {value}'
 for path in destination.rglob('*.html'):
-    parser = CheckLinks(); parser.path = path; parser.feed(path.read_text())
+    def version_asset(match):
+        url = urlsplit(match[2])
+        if url.scheme or url.netloc: return match[0]
+        asset = (path.parent/unquote(url.path)).resolve()
+        assert asset.is_relative_to(destination.resolve()) and asset.is_file(), asset
+        version = hashlib.sha256(asset.read_bytes()).hexdigest()[:12]
+        return match[1] + match[2] + '?v=' + version + match[3]
+    page = re.sub(r"((?:src|href)=[\"'])([^\"']+\.(?:js|css))([\"'])", version_asset, path.read_text())
+    path.write_text(page)
+    parser = CheckLinks(); parser.path = path; parser.feed(page)
 assert not (destination/'content/source').exists()
 assert not list(destination.rglob('*.MOV')) and not list(destination.rglob('*.mov'))
 files = [p for p in destination.rglob('*') if p.is_file()]

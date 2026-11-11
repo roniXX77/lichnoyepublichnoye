@@ -97,3 +97,5 @@ a{
   .characterButtons {margin-top:40px;gap:18px;}
   .choiceButton {font-size:21px;line-height:1.4;min-height:44px;}
 }
+
+#pauseButton.isReturning {transition:none;opacity:1;pointer-events:auto;}

@@ -12,7 +12,6 @@ window.SiteTranslations = {
   "остановиться": "stop",
   "плейлист": "playlist",
   "личное публичное": "personal public",
-  "13 аудиодорожек": "13 audio tracks",
   "сейчас играет": "now playing",
   "выбери дорожку": "choose a track",
   "стоп": "stop playback",
@@ -118,5 +117,7 @@ window.SiteTranslations = {
   "следующая дорожка": "Next track",
   "назад к письмам": "back to messages",
   "не удалось загрузить текст": "could not load this text. please try again.",
-  "терминал": "terminal"
+  "терминал": "terminal",
+  "10 аудиодорожек": "10 audio tracks",
+  "перемотать дорожку": "Seek track"
 };

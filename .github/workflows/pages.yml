@@ -27,8 +27,8 @@ jobs:
         run: python3 scripts/build-content.py
       - name: Check site references and texts
         run: python3 scripts/check.py
-      - name: Check persistent timer
-        run: node --test tests/timer.test.cjs
+      - name: Check timer and intro resume
+        run: node --test tests/*.test.cjs
       - name: Check media seeking server
         run: python3 tests/serve.test.py
       - name: Package website

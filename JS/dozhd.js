@@ -6,7 +6,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const title = document.getElementById('trackTitle');
   const currentTime = document.getElementById('currentTime');
   const duration = document.getElementById('duration');
-  const fill = document.getElementById('progressFill');
+  const seek = document.getElementById('trackSeek');
+  let scrubbing=false;
   const poem = document.getElementById('rainPoemText');
   const poems = window.RainContent[window.SiteLanguage.current];
   const en = window.SiteLanguage.current === 'en';
@@ -45,11 +46,25 @@ window.addEventListener('DOMContentLoaded', () => {
   function renderProgress() {
     currentTime.textContent = format(audio.currentTime);
     duration.textContent = format(audio.duration);
-    fill.style.width = Number.isFinite(audio.duration) && audio.duration > 0 ? `${audio.currentTime/audio.duration*100}%` : '0%';
+    const ready=Number.isFinite(audio.duration) && audio.duration>0;
+    seek.disabled=!ready;
+    if(!scrubbing)seek.value=ready?String(audio.currentTime/audio.duration*1000):'0';
+    seek.style.setProperty('--progress',`${Number(seek.value)/10}%`);
+    seek.setAttribute('aria-valuetext',`${format(audio.currentTime)} / ${format(audio.duration)}`);
   }
+  seek.addEventListener('pointerdown',()=>{scrubbing=true;});
+  const finishScrub=()=>{scrubbing=false;renderProgress();};
+  window.addEventListener('pointerup',finishScrub);
+  seek.addEventListener('pointercancel',finishScrub);
+  seek.addEventListener('input',()=>{
+    if(Number.isFinite(audio.duration) && audio.duration>0)audio.currentTime=Number(seek.value)/1000*audio.duration;
+    renderProgress();
+  });
+  seek.addEventListener('change',finishScrub);
   function start() { audio.play().catch(renderPlayback); }
   function select(index) {
     if (!items.length) return;
+    scrubbing=false;
     selected = (index + items.length) % items.length;
     const item = items[selected];
     title.textContent = window.SiteLanguage.translate(item.dataset.title);

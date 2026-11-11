@@ -192,22 +192,6 @@
     font-variant-numeric:tabular-nums;
   }
   
-  .progressLine{
-    width:100%;
-    height:6px;
-    border-radius:999px;
-    overflow:hidden;
-    background:rgba(255,255,255,0.14);
-  }
-  
-  .progressFill{
-    width:0%;
-    height:100%;
-    background:#ededed;
-    border-radius:999px;
-    transition:width 0.15s linear;
-  }
-  
   .controls{
     display:flex;
     align-items:center;
@@ -382,3 +366,11 @@
 .iconBtn {display:grid;place-items:center;}
 .iconBtn svg {width:26px;height:26px;}
 .skipTrack svg {width:22px;height:22px;}
+
+.trackSeek {--progress:0%;width:100%;min-width:0;margin:0;height:28px;background:transparent;appearance:none;-webkit-appearance:none;cursor:pointer;touch-action:pan-y;}
+.trackSeek::-webkit-slider-runnable-track {height:4px;border-radius:4px;background:linear-gradient(90deg,#eee var(--progress),#ffffff30 var(--progress));}
+.trackSeek::-webkit-slider-thumb {appearance:none;-webkit-appearance:none;width:14px;height:14px;margin-top:-5px;border:0;border-radius:50%;background:#fff;box-shadow:0 0 0 3px #ffffff18;}
+.trackSeek::-moz-range-track {height:4px;border-radius:4px;background:linear-gradient(90deg,#eee var(--progress),#ffffff30 var(--progress));}
+.trackSeek::-moz-range-thumb {width:14px;height:14px;border:0;border-radius:50%;background:#fff;}
+.trackSeek:focus-visible {outline:1px solid #ffffff80;outline-offset:4px;}
+.trackSeek:disabled {opacity:.35;cursor:default;}
