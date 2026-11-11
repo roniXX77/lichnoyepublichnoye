@@ -1,0 +1,7 @@
+/* Preserve source document typography while removing print margins on small frames. */
+@media(max-width:600px) {
+  html {overflow-wrap:anywhere;}
+  body.doc-content {padding:18px!important;max-width:none!important;margin:0!important;box-sizing:border-box;}
+  p,li {max-width:100%;}
+  img {max-width:100%;height:auto;}
+}

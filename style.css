@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    height: 100%;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+    cursor: default;
+}
+#mainPage{
+    background-color: black;
+    width: 100%;
+    height: 100%;
+}
+#mainPageVideo{  
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  
+}
+#pauseButton{
+    cursor: default;
+    text-align: center;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: 0;
+    color: rgba(255, 255, 255, 0.282);
+    border: none;
+    outline: none;
+    font-size: 260%;
+    transition: opacity 20s ease-in-out;
+    pointer-events: none;
+}
+#pauseButton.show{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* error page */
+#choicePage{
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: "Times New Roman", serif;
+}
+#badGateway{
+    display: flex;
+    align-items: center;
+    height: 19%;
+}
+.line{
+    height: .2%;
+    background-color: black;
+    width: 100%;
+}
+#characterChoice{
+  align-items: center;
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+}
+.tryChoice{
+  font-size: 170%;
+}
+.characterButtons{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20%;
+  width: 100%;
+}
+.choiceButton{
+  margin: 1%;
+    font-size: 150%;
+    background: 0;
+    border: none;
+    outline: none;
+}
+.choiceButton {text-align:center;display:block;cursor:pointer;}
+.choiceButton:focus-visible {outline:1px solid currentColor;outline-offset:4px;}
+@media(max-width:700px), (max-height:500px) {
+  #choicePage {height:auto;min-height:100svh;padding-bottom:100px;}
+  #badGateway {min-height:100px;text-align:center;}
+  .line {min-height:1px;}
+  #characterChoice {padding:24px 20px;}
+  .tryChoice {font-size:22px;text-align:center;}
+  .characterButtons {margin-top:40px;gap:18px;}
+  .choiceButton {font-size:21px;line-height:1.4;min-height:44px;}
+}

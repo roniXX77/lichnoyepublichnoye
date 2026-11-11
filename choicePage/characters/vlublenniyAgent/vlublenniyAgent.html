@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lichnoyepublichnoye</title>
+  <link rel="stylesheet" href="../../../css/vlublenniyAgent.css" />
+  <link rel="stylesheet" href="../../../css/shared.css">
+  <script src="../../../content/translations.js"></script>
+  <script src="../../../JS/shared/i18n.js"></script>
+  <script src="../../../JS/shared/timer.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../imagesAndVideos/icons/icon-32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../imagesAndVideos/icons/icon-48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../imagesAndVideos/icons/icon-180.png">
+</head>
+<body class="mailPage">
+  <aside class="mailSidebar">
+    <div class="mailSidebarTop">
+      <h1 class="mailTitle">почта</h1>
+      <button class="composeBtn" id="composeBtn">написать</button>
+    </div>
+    <nav class="mailFolders" id="mailFolders">
+      <button class="folder active" data-folder="sent">отправленные</button>
+      <button class="folder" data-folder="drafts">черновики</button>
+      <button class="folder" data-folder="spam">спам</button>
+      <button class="folder" data-folder="trash">корзина</button>
+    </nav>
+  </aside>
+
+  <main class="mailMain">
+    <header class="mailTopbar">
+      <div class="searchWrap">
+        <input id="searchInput" class="searchInput" type="text" placeholder="поиск" />
+      </div>
+      <div class="topbarRight">
+        <div class="timerBlock">
+            <div id="mailTimer" class="mailTimer"><span>00:00</span></div>
+            <button id="stopBtn" class="stopBtn">остановиться</button>
+          </div>
+        <div class="avatar">VA</div>
+      </div>
+    </header>
+
+    <section class="mailContent">
+      <div class="mailList">
+        <div class="mailListHeader">
+          <label class="checkWrap">
+            <input type="checkbox" id="selectAll" />
+            <span>выбрать все</span>
+          </label>
+          <div class="listActions" id="listActions">
+            <button class="miniBtn" data-action="spam">спам</button>
+            <button class="miniBtn danger" data-action="trash">удалить</button>
+          </div>
+        </div>
+
+        <div class="mailItems" id="mailItems"></div>
+      </div>
+    </section>
+  </main>
+
+
+  
+  <script src="../../../content/mail.js"></script>
+  <script src="../../../JS/mail.js"></script>
+</body>
+</html>
+
+

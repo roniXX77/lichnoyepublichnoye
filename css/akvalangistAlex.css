@@ -1,0 +1,81 @@
+:root {color-scheme:dark;--paper:#e5e1d2;--ink:#282b23;--acid:#cbd087;}
+* {box-sizing:border-box;}
+html,body {margin:0;min-height:100%;}
+body.alexPage {background:#090b0a;color:var(--paper);font-family:'Courier New',monospace;}
+button,a,input {-webkit-tap-highlight-color:transparent;}
+button {font:inherit;cursor:pointer;}
+a {color:inherit;text-decoration:none;}
+button:focus-visible,a:focus-visible,input:focus-visible {outline:2px solid var(--acid);outline-offset:5px;}
+[hidden] {display:none!important;}
+.alexHeader {position:fixed;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:25px 32px;font-size:11px;letter-spacing:.12em;border-bottom:1px solid #e5e1d21f;background:linear-gradient(#0009,transparent);}
+.alexIdentity,.alexHeaderRight {display:flex;align-items:center;gap:22px;}
+.recordDot {width:6px;height:6px;border-radius:50%;background:var(--acid);box-shadow:0 0 12px #cbd08777;}
+#alexTimer {font-variant-numeric:tabular-nums;color:#d4d5c4;}
+#alexExit {color:#e5e1d299;}
+.alexCinema {position:relative;width:100%;height:100svh;min-height:500px;overflow:hidden;background:#000;}
+#alexVideo {position:absolute;width:100%;height:100%;object-fit:cover;opacity:.82;filter:saturate(.65) contrast(1.04);}
+.filmVignette {position:absolute;inset:0;background:linear-gradient(#0006,transparent 35%,transparent 55%,#000c),radial-gradient(ellipse,transparent 40%,#0007);pointer-events:none;}
+.alexCinema::after {content:'';position:absolute;inset:0;pointer-events:none;opacity:.12;background:repeating-linear-gradient(0deg,transparent 0 2px,#000 3px 4px);}
+.filmLabel {position:absolute;top:128px;left:5vw;pointer-events:none;}
+#filmChapter {font-size:10px;letter-spacing:.25em;color:#e5e1d28c;}
+.filmLabel h1 {margin:12px 0;font:italic clamp(30px,5.5vw,80px)/1 Georgia,serif;letter-spacing:-.04em;font-weight:400;}
+.alexButton {padding:12px 17px;border:1px solid #e5e1d24d;border-radius:2px;background:#1118;color:inherit;font-size:11px;letter-spacing:.03em;transition:background .2s,border-color .2s;}
+.alexButton:hover {background:#e5e1d214;border-color:#e5e1d2aa;}
+.skipStory {position:absolute;top:126px;right:32px;z-index:3;}
+.startFilm {position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);z-index:3;border:0;background:transparent;color:var(--paper);display:flex;align-items:center;gap:14px;font-size:12px;letter-spacing:.1em;white-space:nowrap;}
+.startTriangle {display:grid;place-items:center;width:58px;height:58px;border:1px solid #e5e1d277;border-radius:50%;background:#0004;backdrop-filter:blur(8px);font-size:15px;}
+.alexSubtitle {position:absolute;left:50%;transform:translateX(-50%);bottom:118px;width:min(780px,84%);margin:0;text-align:center;font:clamp(18px,2vw,28px)/1.45 Georgia,serif;color:#fbf9ef;text-shadow:0 2px 4px #000,0 0 20px #000;z-index:2;white-space:pre-line;}
+.filmTransport {position:absolute;bottom:43px;left:5vw;width:min(560px,63vw);display:flex;align-items:center;gap:14px;z-index:3;font-size:10px;color:#e5e1d2aa;}
+.filmPlayPause {color:inherit;border:0;background:transparent;padding:10px 4px;min-width:25px;}
+#filmSeek {flex:1;min-width:20px;height:2px;accent-color:var(--paper);cursor:pointer;}
+.alexArchive {padding:136px 5vw 60px;max-width:1600px;margin:auto;background:radial-gradient(ellipse at top,#24291b50,transparent 60%);}
+.archiveHeading {display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:55px;}
+.archiveEyebrow {font-size:10px;letter-spacing:.16em;color:#a3aa8f;margin:0 0 24px;}
+.archiveHeading h1 {font:normal clamp(48px,7vw,100px)/.97 Georgia,serif;letter-spacing:-.06em;margin:0 0 22px;}
+.replayStory {margin-bottom:8px;white-space:nowrap;}
+.archiveRule {display:flex;justify-content:space-between;padding:16px 0;border-top:1px solid #e5e1d244;border-bottom:1px solid #e5e1d225;margin-bottom:30px;font-size:9px;letter-spacing:.15em;color:#a6aa9b;}
+.dossierGrid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;}
+.dossierCard {position:relative;display:block;width:100%;padding:13px 13px 18px;color:var(--ink);text-align:left;border:1px solid #d2ccbb;background:var(--paper);box-shadow:2px 5px 0 #0007;transition:transform .2s,background .2s;}
+.dossierCard:nth-child(3n+1) {transform:rotate(-.7deg);}
+.dossierCard:nth-child(3n+2) {transform:rotate(.6deg);}
+.dossierCard:hover {transform:translateY(-6px) rotate(0);background:#f1eddf;}
+.cardTab {position:absolute;top:-8px;left:12px;width:65px;height:8px;background:var(--paper);border:1px solid #d2ccbb;border-bottom:none;}
+.cardMeta {display:flex;justify-content:space-between;padding:2px 0 12px;font-size:9px;letter-spacing:.08em;border-bottom:1px solid #282b2333;}
+.cardImage {height:230px;display:grid;place-items:center;margin:12px 0 16px;overflow:hidden;background:repeating-linear-gradient(transparent 0 44px,#282b2318 44px 45px);}
+.cardImage img {width:100%;height:100%;max-height:230px;object-fit:contain;mix-blend-mode:multiply;filter:saturate(.55) contrast(1.1);}
+.cardTitle {display:block;font-size:11px;line-height:1.6;min-height:35px;padding-right:25px;}
+.cardArrow {position:absolute;bottom:19px;right:15px;font-size:17px;}
+.archiveFooter {display:flex;justify-content:space-between;gap:20px;font-size:9px;letter-spacing:.1em;color:#a3aa8f80;margin-top:50px;padding-top:24px;border-top:1px solid #e5e1d222;}
+.dossierDialog {position:fixed;padding:0;border:1px solid #b7b29e;background:var(--paper);color:var(--ink);width:min(1060px,92vw);max-height:86svh;box-shadow:0 40px 180px #0009;overflow:auto;}
+.dossierDialog[open] {display:grid;grid-template-columns:34% 1fr;}
+.dossierDialog::backdrop {background:#050706db;backdrop-filter:blur(8px);}
+.closeDossier {position:sticky;top:10px;left:calc(100% - 46px);grid-column:1/-1;z-index:3;margin:10px 10px -44px auto;width:34px;height:34px;border:1px solid #282b2344;background:var(--paper);color:var(--ink);font-size:23px;}
+.dossierPortrait {padding:40px 24px;border-right:1px solid #282b2330;display:flex;flex-direction:column;gap:25px;background:repeating-linear-gradient(transparent 0 59px,#282b2312 59px 60px);}
+.dossierNumber {font-size:12px;letter-spacing:.1em;}
+.dossierPortrait img {width:100%;height:350px;object-fit:contain;mix-blend-mode:multiply;}
+.portraitRuler {font-size:10px;letter-spacing:.08em;text-align:center;opacity:.5;}
+.dossierDocument {padding:45px 40px 28px;min-width:0;}
+.documentStamp {display:inline-block;border:1px solid #786d4c;color:#786d4c;padding:7px 12px;transform:rotate(-3deg);font-size:9px;letter-spacing:.16em;}
+#dossierTitle {font:normal 28px/1.2 Georgia,serif;margin:22px 0 28px;}
+#dossierText {font:13px/1.9 'Courier New',monospace;white-space:pre-wrap;overflow-wrap:anywhere;}
+.dossierNavigation {display:flex;justify-content:space-between;align-items:center;margin-top:35px;padding-top:18px;border-top:1px solid #282b2333;font-size:10px;}
+.dossierNavigation button {color:var(--ink);font-size:22px;background:none;border:0;padding:5px 15px;}
+@media(min-width:1600px) {.cardImage,.cardImage img {height:290px;max-height:290px;}}
+@media(max-width:1050px) {.dossierGrid {grid-template-columns:repeat(3,minmax(0,1fr));}.cardImage,.cardImage img {height:210px;max-height:210px;}}
+@media(max-width:760px) {
+ .alexHeader {padding:22px 18px;font-size:9px;}.alexIdentity,.alexHeaderRight {gap:12px;}
+ .filmLabel {top:105px;left:22px;}.skipStory {top:195px;right:20px;}.filmLabel h1 {font-size:48px;}
+ .alexSubtitle {bottom:155px;width:87%;font-size:21px;}.filmTransport {bottom:98px;left:22px;width:calc(100% - 44px);}
+ .alexArchive {padding:115px 20px 70px;}.archiveHeading {display:block;margin-bottom:30px;}.replayStory {margin-top:15px;}
+ .archiveHeading h1 {font-size:68px;}.archiveEyebrow {font-size:9px;}.archiveRule {font-size:8px;letter-spacing:.05em;gap:20px;}
+ .dossierGrid {grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 13px;}.dossierCard {padding:10px 10px 16px;}
+ .cardImage,.cardImage img {height:180px;max-height:180px;}.cardTitle {font-size:10px;}.cardMeta {font-size:8px;}
+ .dossierDialog[open] {display:block;}.dossierPortrait {border:0;border-bottom:1px solid #282b2330;padding:22px;}.dossierPortrait img {height:240px;}.portraitRuler {display:none;}
+ .dossierDocument {padding:28px 22px;}.closeDossier {display:block;}.archiveFooter {font-size:8px;}
+}
+@media(prefers-reduced-motion:reduce) {.dossierCard,.alexButton {transition:none;}.dossierCard {transform:none!important;}}
+.dossierDialog .dossierLanguage {position:sticky;top:10px;right:auto;bottom:auto;grid-column:1/-1;justify-self:end;align-self:start;margin:10px 55px -50px auto;min-height:34px;padding:3px;background:#373a30;color:#f6f4e9;border-color:#282b2333;z-index:6;}
+.dossierDialog .dossierLanguage .languageOption {padding:6px 8px;}
+
+.sceneFade {position:fixed;inset:0;z-index:50;background:#000;opacity:0;pointer-events:all;}
+.archiveRule {justify-content:flex-end;}

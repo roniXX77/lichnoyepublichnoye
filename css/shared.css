@@ -1,0 +1,27 @@
+/* Quiet, shared controls above each character's own interface. */
+.siteUtility {
+  position:fixed;z-index:2147483647;bottom:56px;right:22px;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  min-height:40px;padding:5px;border:1px solid rgba(255,255,255,.24);
+  border-radius:999px;background:rgba(17,20,23,.64);color:#f6f5ee;
+  box-shadow:0 4px 24px #0002,inset 0 1px 0 #ffffff0a;
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  font:11px/1.2 Arial,sans-serif;letter-spacing:.08em;cursor:pointer;
+  transition:background .2s,border-color .2s,transform .2s;
+}
+.siteUtility:hover {background:rgba(31,35,39,.9);border-color:#ffffff70;}
+.siteUtility:active {transform:translateY(1px);}
+.siteUtility:focus-visible {outline:2px solid currentColor;outline-offset:4px;}
+.languageOption {padding:8px 9px;opacity:.5;border-radius:999px;}
+.languageOption.isCurrent {background:#f4f2e7;color:#15191a;opacity:1;box-shadow:0 1px 5px #0002;}
+.languageDivider {width:1px;height:10px;background:#ffffff28;margin:0 -7px;}
+.siteSound {right:136px;padding:10px 16px;gap:9px;letter-spacing:.03em;}
+.siteSound svg {width:16px;height:16px;flex:none;}
+.siteUtility[hidden] {display:none;}
+#choicePage .siteUtility {background:#f2f1ed;color:#24282a;border-color:#24282a28;}
+#choicePage .languageOption.isCurrent {background:#24282a;color:#fff;}
+#choicePage .languageDivider {background:#24282a28;}
+@media(max-width:600px) {.siteUtility {right:14px;bottom:56px;}.siteSound {right:124px;}}
+@media(prefers-reduced-motion:reduce) {.siteUtility {transition:none;}}
+/* Leave the manifesto's acceptance control unobstructed. */
+body.manifest .siteLanguage {top:16px;bottom:auto;}

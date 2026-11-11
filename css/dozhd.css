@@ -1,0 +1,381 @@
+*{
+    box-sizing:border-box;
+  }
+  
+  html,
+  body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+  }
+  
+  body.dozhdPage{
+    font-family:"Inter", Arial, Helvetica, sans-serif;
+    color:#f2f2f2;
+    background:
+      radial-gradient(circle at top left, #666 0%, #343434 28%, #111 68%, #050505 100%);
+  }
+  
+  .dozhdWrap{
+    width:100%;
+    height:100vh;
+    padding:28px 32px 30px;
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+  
+  .topPanel{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    align-items:start;
+    gap:24px;
+  }
+  
+  .topLeft{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+  }
+  
+  .pageTimer{
+    min-width:116px;
+    padding:12px 18px;
+    border-radius:20px;
+    text-align:center;
+    font-size:22px;
+    font-weight:700;
+    letter-spacing:2px;
+    background:rgba(255,255,255,0.07);
+    border:1px solid rgba(255,255,255,0.09);
+    box-shadow:0 10px 30px rgba(0,0,0,0.28);
+  }
+  
+  .exitBtn{
+    text-decoration:none;
+    color:#f2f2f2;
+    font-size:16px;
+    font-weight:500;
+    padding:12px 20px;
+    border-radius:999px;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.08);
+    transition:0.2s ease;
+  }
+  
+  .exitBtn:hover{
+    background:rgba(255,255,255,0.14);
+  }
+  
+  .topRight{
+    text-align:right;
+    align-self:start;
+  }
+  
+  .playlistLabel{
+    margin-bottom:10px;
+    color:#b8b8b8;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:4px;
+  }
+  
+  .topRight h1{
+    margin:0;
+    font-size:clamp(36px, 4.1vw, 72px);
+    line-height:0.96;
+    font-weight:800;
+    letter-spacing:-0.03em;
+  }
+  
+  .topRight p{
+    margin:10px 0 0;
+    color:#b2b2b2;
+    font-size:16px;
+  }
+  
+  .contentGrid{
+    min-height:0;
+    flex:1;
+    display:grid;
+    grid-template-columns:420px minmax(0, 1fr);
+    gap:24px;
+  }
+  
+  .leftCard,
+  .rightCard{
+    min-height:0;
+    background:linear-gradient(180deg, rgba(255,255,255,0.065), rgba(255,255,255,0.045));
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:30px;
+    box-shadow:0 24px 60px rgba(0,0,0,0.34);
+    backdrop-filter:blur(10px);
+  }
+  
+  .leftCard{
+    padding:22px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  
+  .rainWindow{
+    position:relative;
+    width:100%;
+    aspect-ratio:1 / 1;
+    border-radius:26px;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 25% 20%, rgba(255,255,255,0.18), transparent 22%),
+      linear-gradient(180deg, #8b8b8b 0%, #646464 26%, #383838 58%, #111 100%);
+    border:1px solid rgba(255,255,255,0.08);
+  }
+  
+  .rainLayer{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+  }
+  
+  .rainDrop {
+    position:absolute;
+    top:-30%;
+    width:1px;
+    height:var(--length);
+    left:var(--left);
+    opacity:var(--opacity);
+    background:linear-gradient(transparent, rgba(225,237,245,.75));
+    transform:rotate(12deg);
+    animation:rainFall var(--speed) var(--delay) linear infinite;
+    will-change:transform;
+  }
+  .rainBack { filter:blur(.8px); opacity:.45; }
+  .rainFront { opacity:.85; }
+  @keyframes rainFall {
+    from { transform:translate3d(30px,0,0) rotate(12deg); }
+    to { transform:translate3d(-80px,650px,0) rotate(12deg); }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    .rainDrop { animation:none; top:var(--left); transform:rotate(12deg); }
+  }
+
+  
+  .currentBlock{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  
+  .currentLabel{
+    color:#b9b9b9;
+    font-size:12px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+  }
+  
+  .currentBlock h2{
+    margin:0;
+    font-size:24px;
+    line-height:1.05;
+    font-weight:700;
+  }
+  
+  .audioTimerRow{
+    display:grid;
+    grid-template-columns:56px 1fr 56px;
+    align-items:center;
+    gap:12px;
+    color:#d9d9d9;
+    font-size:16px;
+    font-variant-numeric:tabular-nums;
+  }
+  
+  .progressLine{
+    width:100%;
+    height:6px;
+    border-radius:999px;
+    overflow:hidden;
+    background:rgba(255,255,255,0.14);
+  }
+  
+  .progressFill{
+    width:0%;
+    height:100%;
+    background:#ededed;
+    border-radius:999px;
+    transition:width 0.15s linear;
+  }
+  
+  .controls{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:24px;
+    width:100%;
+    margin-top:auto;
+  }
+  
+  .iconBtn{
+    border:none;
+    cursor:pointer;
+    transition:0.18s ease;
+    font-family:inherit;
+  }
+  
+  .iconBtn{
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    background:#ededed;
+    color:#111;
+    font-size:24px;
+    font-weight:700;
+  }
+  
+  
+  .iconBtn:hover{
+    transform:translateY(-1px);
+    background:#fff;
+  }
+  
+  .rightCard{
+    padding:16px 16px 12px;
+    display:flex;
+    flex-direction:column;
+  }
+  
+  .listHead{
+    display:grid;
+    grid-template-columns:70px 1fr 90px;
+    gap:16px;
+    padding:10px 16px 14px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    color:#aeaeae;
+    font-size:14px;
+    flex:0 0 auto;
+  }
+  
+  .trackList{
+    min-height:0;
+    overflow-y:auto;
+    padding:8px 4px 6px;
+    scrollbar-width:thin;
+    scrollbar-color:rgba(255,255,255,0.18) transparent;
+  }
+  
+  .trackList::-webkit-scrollbar{
+    width:8px;
+  }
+  
+  .trackList::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,0.16);
+    border-radius:999px;
+  }
+  
+  .trackItem{
+    width:100%;
+    border:none;
+    background:transparent;
+    color:#f2f2f2;
+    display:grid;
+    grid-template-columns:70px 1fr 90px;
+    gap:16px;
+    align-items:center;
+    text-align:left;
+    padding:14px 12px;
+    border-radius:18px;
+    cursor:pointer;
+    font-size:18px;
+    transition:background 0.18s ease, transform 0.18s ease;
+  }
+  
+  .trackItem:hover{
+    background:rgba(255,255,255,0.06);
+  }
+  
+  .trackItem.active{
+    background:rgba(255,255,255,0.14);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,0.07);
+  }
+  
+  .trackItem.playing .trackName{
+    color:#ffffff;
+  }
+  
+  .trackName{
+    font-weight:600;
+  }
+  
+  .trackTime{
+    text-align:right;
+    color:#b7b7b7;
+    font-size:15px;
+  }
+  
+  @media (max-width: 1100px){
+    .contentGrid{
+      grid-template-columns:minmax(0,1fr);
+    }
+  
+    .topPanel{
+      grid-template-columns:minmax(0,1fr);
+    }
+  
+    .topRight{
+      text-align:left;
+    }
+  }
+  
+  @media (max-width: 700px){
+    .dozhdWrap{
+      padding:18px;
+    }
+  
+    .contentGrid{
+      gap:18px;
+    }
+  
+    .topRight h1{
+      font-size:40px;
+    }
+  
+    .trackItem{
+      grid-template-columns:54px 1fr 70px;
+      font-size:16px;
+    }
+  
+    .listHead{
+      grid-template-columns:54px 1fr 70px;
+    }
+  }
+/* Keep the player and playlist reachable on smaller displays. */
+@media (max-width:1100px), (max-height:740px) {
+  html:has(.dozhdPage), body.dozhdPage { height:auto; overflow:auto; }
+  .dozhdWrap { height:auto; min-height:100vh; }
+  .rainWindow { max-width:420px; align-self:center; }
+  .trackList { max-height:65vh; }
+}
+
+.rainBackdrop {position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;}
+.dozhdWrap {position:relative;z-index:1;}
+.rainWindow {background:#fff;border-color:#ffffff80;}
+.rainPoem {position:absolute;inset:0;padding:24px;display:flex;flex-direction:column;gap:18px;background:#fff;color:#111;}
+.rainPoemLabel {font:10px/1.2 Arial,sans-serif;letter-spacing:.16em;color:#686868;}
+#rainPoemText {min-height:0;overflow-y:auto;white-space:pre-wrap;scrollbar-width:thin;scrollbar-color:#aaa #fff;font:400 clamp(15px,1.15vw,17px)/1.75 Arial,Helvetica,sans-serif;color:#111;padding-right:8px;}
+#rainPoemText:focus-visible {outline:1px solid #555;outline-offset:4px;}
+@keyframes rainFall {
+  from {transform:translate3d(30px,0,0) rotate(12deg);}
+  to {transform:translate3d(-80px,calc(140vh + 100px),0) rotate(12deg);}
+}
+
+.skipTrack {width:48px;height:48px;display:grid;place-items:center;border:1px solid #ffffff26;border-radius:50%;background:#ffffff08;color:#fff;font:22px/1 Arial,sans-serif;cursor:pointer;}
+.skipTrack:hover {background:#ffffff20;}
+.skipTrack:focus-visible,.iconBtn:focus-visible {outline:2px solid #fff;outline-offset:4px;}
+
+.leftCard,.rightCard,.currentBlock {min-width:0;}
+.trackName {min-width:0;overflow-wrap:anywhere;}
+@media(max-width:480px) {
+  .trackItem,.listHead {grid-template-columns:36px minmax(0,1fr) 48px;gap:8px;}
+}

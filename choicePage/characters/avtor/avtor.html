@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lichnoyepublichnoye</title>
+  <link rel="stylesheet" href="../../../css/avtor.css" />
+  <link rel="stylesheet" href="../../../css/shared.css">
+  <script src="../../../content/translations.js"></script>
+  <script src="../../../JS/shared/i18n.js"></script>
+  <script src="../../../JS/shared/timer.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../imagesAndVideos/icons/icon-32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../imagesAndVideos/icons/icon-48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../imagesAndVideos/icons/icon-180.png">
+</head>
+<body class="avtorBody">
+  <main class="desktop">
+    <section class="desktopIcons"></section>
+
+    <section class="windowsLayer" id="windowsLayer"></section>
+
+    <footer class="taskbar">
+      <button class="startButton" id="startButton">
+        <span class="startButton__logo"></span>
+        <span>start</span>
+      </button>
+
+      <div class="taskbarPrograms" id="taskbarPrograms"></div>
+
+      <div class="taskbarTray">
+        <button class="stopButton" id="stopBtn">остановиться</button>
+        <span id="avtorTimer">00:00</span>
+      </div>
+    </footer>
+
+    <div class="startMenu" id="startMenu">
+      <div class="startMenu__header">личное публичное</div>
+    
+      <div class="startMenu__body">
+        <button class="startMenu__item" data-open-file="author-main.html" data-open-title="main">
+          <img src="../../../imagesAndVideos/folderIcon.png" alt="">
+          <span>main</span>
+        </button>
+    
+        <button class="startMenu__item" data-open-file="author-2.html" data-open-title="2. практика разрушения доверия">
+          <img src="../../../imagesAndVideos/folderIcon.png" alt="">
+          <span>2. практика разрушения доверия</span>
+        </button>
+    
+        <button class="startMenu__item" data-open-file="author-4.html" data-open-title="4. послание в космос">
+          <img src="../../../imagesAndVideos/folderIcon.png" alt="">
+          <span>4. послание в космос</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../../JS/avtor.js"></script>
+</body>
+</html>

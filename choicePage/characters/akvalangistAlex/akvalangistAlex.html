@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>lichnoyepublichnoye</title>
+  <link rel="stylesheet" href="../../../css/akvalangistAlex.css">
+  <link rel="stylesheet" href="../../../css/shared.css">
+  <script src="../../../content/translations.js"></script>
+  <script src="../../../JS/shared/i18n.js"></script>
+  <script src="../../../JS/shared/timer.js"></script>
+  <script src="../../../content/alex.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../imagesAndVideos/icons/icon-32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../imagesAndVideos/icons/icon-48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../imagesAndVideos/icons/icon-180.png">
+</head>
+<body class="alexPage">
+  <header class="alexHeader" data-no-translate>
+    <a class="alexIdentity" href="../../../main.html"><span class="recordDot" aria-hidden="true"></span><span id="alexName">ALEX THE DIVER</span></a>
+    <div class="alexHeaderRight"><span id="alexTimer" aria-label="Time on site">00:00</span><a id="alexExit" href="../../../main.html">exit ↗</a></div>
+  </header>
+  <main data-no-translate>
+    <section id="alexCinema" class="alexCinema" aria-labelledby="filmTitle">
+      <video id="alexVideo" muted loop autoplay playsinline preload="auto" aria-label="Alex the diver film"><source src="../../../imagesAndVideos/alex/film.mp4" type="video/mp4"></video>
+      <div class="filmVignette" aria-hidden="true"></div>
+      <div class="filmLabel"><span id="filmChapter">01 / THE SHORE</span><h1 id="filmTitle">alex the diver</h1></div>
+      <button id="skipStory" class="alexButton skipStory" type="button">skip the story ↠</button>
+      <button id="startFilm" class="startFilm" type="button" hidden><span class="startTriangle" aria-hidden="true">▶</span><span id="startFilmLabel">play the film</span></button>
+      <p id="alexSubtitle" class="alexSubtitle" aria-live="off"></p>
+      <div class="filmTransport">
+        <button id="filmPlayPause" class="filmPlayPause" type="button" aria-label="Play or pause narration">▶</button>
+        <span id="filmCurrent">00:00</span>
+        <input id="filmSeek" type="range" min="0" max="1000" value="0" aria-label="Seek narration">
+        <span id="filmDuration">00:00</span>
+      </div>
+      <audio id="alexNarration" preload="metadata"></audio>
+    </section>
+    <section id="alexArchive" class="alexArchive" aria-labelledby="archiveTitle" hidden>
+      <div class="archiveHeading">
+        <div><p class="archiveEyebrow" id="archiveEyebrow">PERSONAL PUBLIC</p><h1 id="archiveTitle">Urban Bestiary</h1></div>
+        <button type="button" id="replayStory" class="alexButton replayStory">↶ rewind the story</button>
+      </div>
+      <div class="archiveRule"><span id="archiveHint">SELECT A FILE TO READ</span></div>
+      <div id="dossierGrid" class="dossierGrid"></div>
+      <footer class="archiveFooter"><span>LP / ALEX / ARCHIVE</span></footer>
+    </section>
+  </main>
+  <div id="sceneFade" class="sceneFade" aria-hidden="true" hidden></div>
+  <dialog id="dossierDialog" class="dossierDialog" data-no-translate>
+    <button id="closeDossier" class="closeDossier" type="button" aria-label="Close file">×</button>
+    <div class="dossierPortrait"><span id="dossierNumber" class="dossierNumber"></span><img id="dossierImage" alt=""><span class="portraitRuler" aria-hidden="true">150 — 160 — 170 — 180 — 190</span></div>
+    <article class="dossierDocument"><p class="documentStamp" id="documentStamp">PERSONAL RECORD</p><h2 id="dossierTitle"></h2><div id="dossierText"></div><div class="dossierNavigation"><button id="previousDossier" type="button">←</button><span id="dossierPosition"></span><button id="nextDossier" type="button">→</button></div></article>
+  </dialog>
+  <script src="../../../JS/akvalangistAlex.js"></script>
+</body>
+</html>

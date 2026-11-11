@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lichnoyepublichnoye</title>
+  <link rel="stylesheet" href="../../../css/dohlyiTurist.css" />
+  <link rel="stylesheet" href="../../../css/shared.css">
+  <script src="../../../content/translations.js"></script>
+  <script src="../../../JS/shared/i18n.js"></script>
+  <script src="../../../JS/shared/timer.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../imagesAndVideos/icons/icon-32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="../../../imagesAndVideos/icons/icon-48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../imagesAndVideos/icons/icon-180.png">
+</head>
+<body id="turistPage">
+  <main class="departure-board">
+    <header class="board-top">
+      <div class="board-top__left">
+        <div class="board-icon">i</div>
+        <div class="board-heading">
+          <div class="board-heading__title">departures</div>
+          <div class="board-heading__subtitle">вылет</div>
+        </div>
+      </div>
+    
+      <div class="board-top__right">
+        <div class="board-clock-box">
+          <span class="board-clock-label">local time</span>
+          <span class="board-clock" id="timer">00:00</span>
+        </div>
+    
+        <div class="board-exit-box">
+          <span class="board-exit-label">menu</span>
+          <a class="board-exit" href="../../../main.html">exit</a>
+        </div>
+
+        <div class="board-page-box">
+          <span class="board-page-label">page</span>
+          <span class="board-page" id="pageIndicator">1 / 2</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="board-screen">
+      <div class="board-columns">
+        <div>time</div>
+        <div>destination</div>
+        <div>flight</div>
+        <div>gate</div>
+        <div>status</div>
+      </div>
+
+      <div class="board-rows" id="flightsContainer"></div>
+
+      <div class="board-bottom-line">
+        <div class="board-ticker-track">
+          <div class="board-ticker">
+            departures information display system • flight details available on click • terminal feed active • departures information display system • flight details available on click • terminal feed active •
+          </div>
+          <div class="board-ticker" aria-hidden="true">
+            departures information display system • flight details available on click • terminal feed active • departures information display system • flight details available on click • terminal feed active •
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="flight-modal" id="flightModal" aria-hidden="true">
+    <div class="flight-modal__backdrop" id="flightModalBackdrop"></div>
+
+    <section class="flight-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="flightModalTitle">
+      <header class="flight-modal__header">
+        <div class="flight-modal__title-wrap">
+          <h2 class="flight-modal__title" id="flightModalTitle">flight details</h2>
+          <div class="flight-modal__meta" id="flightModalMeta"></div>
+        </div>
+
+        <button class="flight-modal__close" id="flightModalClose" type="button">close</button>
+      </header>
+
+      <div class="flight-modal__content" id="flightModalContent">
+        <p>loading...</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="../../../JS/dohlyiTurist.js"></script>
+</body>
+</html>

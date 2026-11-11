@@ -1,0 +1,15 @@
+.DS_Store
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+.aws/
+.codex/
+.agents/
+dist/
+content/source/
+imagesAndVideos/lichnoyepublichnoye.mov
+imagesAndVideos/dandelion.mov
+imagesAndVideos/alex/alexthediver_video.MOV
+imagesAndVideos/icons/logo-original.png
